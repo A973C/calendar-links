@@ -36,20 +36,20 @@ We highly appreciate you sending us a postcard from your hometown, mentioning wh
 
 You can install the package via composer:
 
-```bash
+```sh
 composer require spatie/calendar-links
 ```
 
 ## Usage
 
-``` php
+```php
 <?php
 use Spatie\CalendarLinks\Link;
 
 $from = DateTime::createFromFormat('Y-m-d H:i', '2018-02-01 09:00');
 $to = DateTime::createFromFormat('Y-m-d H:i', '2018-02-01 18:00');
 
-$link = Link::create('Sebastian\'s birthday', $from, $to)
+$link = Link::create('Sebastian’s birthday', $from, $to)
     ->description('Cookies & cocktails!')
     ->address('Kruikstraat 22, 2018 Antwerpen');
 
@@ -65,11 +65,17 @@ echo $link->webOutlook();
 // Generate a data uri for an ics file (for iCal & Outlook)
 echo $link->ics();
 
-// Generate a data uri using arbitrary generator:
+// Generate a data URI using arbitrary generator:
 echo $link->formatWith(new \Your\Generator());
 ```
 
 > ⚠️ ICS download links don't work in IE and EdgeHTML-based Edge browsers, see [details](https://github.com/spatie/calendar-links/issues/71).
+
+## Package principles
+
+1. it should produce a small output (too keep pagesize small)
+2. it should be fast (no any external heavy dependencies)
+3. all features should be supported by at least 2 generators (different services have different features)
 
 ## Changelog
 
@@ -77,7 +83,7 @@ Please see [CHANGELOG](CHANGELOG.md) for more information what has changed recen
 
 ## Testing
 
-``` bash
+```sh
 composer test
 ```
 

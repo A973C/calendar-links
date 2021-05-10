@@ -2,7 +2,6 @@
 
 namespace Spatie\CalendarLinks;
 
-use DateTimeInterface;
 use Spatie\CalendarLinks\Exceptions\InvalidLink;
 use Spatie\CalendarLinks\Generators\Google;
 use Spatie\CalendarLinks\Generators\Ics;
@@ -11,8 +10,8 @@ use Spatie\CalendarLinks\Generators\Yahoo;
 
 /**
  * @property-read string $title
- * @property-read DateTimeInterface|\DateTime|\DateTimeImmutable $from
- * @property-read DateTimeInterface|\DateTime|\DateTimeImmutable $to
+ * @property-read \DateTimeInterface|\DateTime|\DateTimeImmutable $from
+ * @property-read \DateTimeInterface|\DateTime|\DateTimeImmutable $to
  * @property-read string $description
  * @property-read string $address
  * @property-read bool $allDay
@@ -37,13 +36,13 @@ class Link
     /** @var string */
     protected $address;
 
-    public function __construct(string $title, DateTimeInterface $from, DateTimeInterface $to, bool $allDay = false)
+    public function __construct(string $title, \DateTimeInterface $from, \DateTimeInterface $to, bool $allDay = false)
     {
         $this->title = $title;
         $this->allDay = $allDay;
 
         if ($to < $from) {
-            throw InvalidLink::invalidDateRange($from, $to);
+            throw InvalidLink::negativeDateRange($from, $to);
         }
 
         $this->from = clone $from;
@@ -59,20 +58,20 @@ class Link
      * @return static
      * @throws InvalidLink
      */
-    public static function create(string $title, DateTimeInterface $from, DateTimeInterface $to, bool $allDay = false)
+    public static function create(string $title, \DateTimeInterface $from, \DateTimeInterface $to, bool $allDay = false)
     {
         return new static($title, $from, $to, $allDay);
     }
 
     /**
      * @param string $title
-     * @param DateTimeInterface|\DateTime|\DateTimeImmutable $fromDate
+     * @param \DateTimeInterface|\DateTime|\DateTimeImmutable $fromDate
      * @param int $numberOfDays
      *
      * @return Link
      * @throws InvalidLink
      */
-    public static function createAllDay(string $title, DateTimeInterface $fromDate, int $numberOfDays = 1): self
+    public static function createAllDay(string $title, \DateTimeInterface $fromDate, int $numberOfDays = 1): self
     {
         $from = (clone $fromDate)->modify('midnight');
         $to = (clone $from)->modify("+$numberOfDays days");

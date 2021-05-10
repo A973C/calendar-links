@@ -4,9 +4,23 @@ All notable changes to `calendar-links` will be documented in this file
 
 ## Unreleased
 
+## 1.6.0 - 2021-04-22
+### Changed
+- Drop support for PHP 7.2 and PHP 7.3
+
+## 1.5.0 - 2021-04-22
+### Changed
+- ICS: support URLs as option (@gulios)
+- ICS: support all day events spanning multiple days (@mrshowerman)
+
+## 1.4.4 - 2021-04-13
+### Fixed
+ - Yahoo link doesn’t work (yahoo changed param names) (@mukeshsah08).
+ - Exception message on invalid dates range (idea by @jason-nabooki)
+
 ## 1.4.3 - 2021-03-05
 ### Changed
- - Google: use UTC timezone to bypass problems with some timzone names unsupported by Google calendar (⚠️ backwards-incompatible if you extended Google Generator)
+ - Google: use UTC timezone to bypass problems with some timezone names unsupported by Google calendar (⚠️ backwards-incompatible if you extended Google Generator)
 
 ### Fixed
  - Spaces replaced by "+" on Outlook.com #109
